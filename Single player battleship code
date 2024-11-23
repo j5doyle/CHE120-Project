@@ -3,12 +3,12 @@ from random import randint
 import os
 
 #Ship Class
-class Ship:
-  def __init__(self, size, orientation, location): #defines if the ship is going to be horizontal or veritcal
+class Ship: #NY: Creates a class for the ships.
+  def __init__(self, size, orientation, location): #NY: Defines the orientation, size and position of the ships on the board.
     self.size = size
     
     if orientation == 'horizontal' or orientation == 'vertical':
-      self.orientation = orientation
+      self.orientation = orientation 
     else:
       raise ValueError("Value must be 'horizontal' or 'vertical'.")
     
@@ -17,52 +17,52 @@ class Ship:
         self.coordinates = []
         for index in range(size):
           if location['col'] + index in range(col_size):
-            self.coordinates.append({'row': location['row'], 'col': location['col'] + index})
+            self.coordinates.append({'row': location['row'], 'col': location['col'] + index}) #NY: Enters the ships coordinates on a row as a list of the indexes of the columns
           else:
-            raise IndexError("Column is out of range.")
+            raise IndexError("Column is out of range.") #NY: Makes sure the whole ship is on a column that exists
       else:
-        raise IndexError("Row is out of range.")
-    elif orientation == 'vertical':
+        raise IndexError("Row is out of range.") #NY: Makes sure the ship is on a row that exists
+    elif orientation == 'vertical': #NY: Does the same thing listed above, but inverted for vertical ships
       if location['col'] in range(col_size):
-        self.coordinates = []
-        for index in range(size):
+        self.coordinates = [] 
+        for index in range(size): 
           if location['row'] + index in range(row_size):
-            self.coordinates.append({'row': location['row'] + index, 'col': location['col']})
+            self.coordinates.append({'row': location['row'] + index, 'col': location['col']}) 
           else:
             raise IndexError("Row is out of range.")
       else:
         raise IndexError("Column is out of range.")
 
-    if self.filled():
-      print_board(board)
-      print(" ".join(str(coords) for coords in self.coordinates))
+    if self.filled(): #NY: Checks to see if new ships location is already filled by another ship
+      print_board(board) #NY: prints the updated board, for debugging (not going to show while playing the game)
+      print(" ".join(str(coords) for coords in self.coordinates)) #NY: Joins all the coordinates in a list together in one long string
       raise IndexError("A ship already occupies that space.")
     else:
-      self.fillBoard()
+      self.fillBoard() #NY: Updates the board with the new ships coordinates
   
-  def filled(self):
+  def filled(self): #NY: Checks to make sure ships arent overlapping.
     for coords in self.coordinates:
-      if board[coords['row']][coords['col']] == 1:
+      if board[coords['row']][coords['col']] == 1: #NY: 1 means a spot on the board is occupied already, 0 would mean the spot is empty
         return True
     return False
   
-  def fillBoard(self):
+  def fillBoard(self): #NY: Updates the board with the new ship's coordinates.
     for coords in self.coordinates:
-      board[coords['row']][coords['col']] = 1
+      board[coords['row']][coords['col']] = 1 #NY: For every coordinate in the ship, asssigns that coordinate 1 indicating it's occupied.
 
-  def contains(self, location):
-    for coords in self.coordinates:
+  def contains(self, location): #NY: Checks to see if the coords of the ship match the location of the shot.
+    for coords in self.coordinates: 
       if coords == location:
         return True
     return False
   
-  def destroyed(self):
+  def destroyed(self): #NY: Checks to see if the ship is destroyed
     for coords in self.coordinates:
-      if board_display[coords['row']][coords['col']] == 'O':
+      if board_display[coords['row']][coords['col']] == 'O': #NY: If the coordinates of the ship are 0, means the ship hasn't been found yet and is not sunk.
         return False
       elif board_display[coords['row']][coords['col']] == '*':
         raise RuntimeError("Board display inaccurate")
-    return True
+    return True #NY: If the ships coordinates are all 1, means the ship has been found and is destroyed.
 
   
 #Settings Variables
