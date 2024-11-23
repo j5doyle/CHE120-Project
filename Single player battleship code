@@ -1,9 +1,10 @@
+#John Doyle (JD), Nathan Yu (NY), Nikhil Bronson (NB), Viktor Ng (VN)
 from random import randint
 import os
 
 #Ship Class
 class Ship:
-  def __init__(self, size, orientation, location):
+  def __init__(self, size, orientation, location): #defines if the ship is going to be horizontal or veritcal
     self.size = size
     
     if orientation == 'horizontal' or orientation == 'vertical':
