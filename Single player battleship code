@@ -81,13 +81,13 @@ board = [[0] * col_size for x in range(row_size)]
 board_display = [["O"] * col_size for x in range(row_size)]
 
 #Functions
-def print_board(board_array): #This function creates the board that we will be playing on VN
+def print_board(board_array): #VN: This function creates the board that we will be playing on
   print("\n  " + " ".join(str(x) for x in range(1, col_size + 1)))
   for r in range(row_size):
     print(str(r + 1) + " " + " ".join(str(c) for c in board_array[r]))
   print()
 
-def search_locations(size, orientation): #This functionn is used within the function random_locations to make sure the ships fit on the board VN
+def search_locations(size, orientation): #VN: This functionn is used within the function random_locations to make sure the ships fit on the board
   locations = []
 
   if orientation != 'horizontal' and orientation != 'vertical':
@@ -111,7 +111,7 @@ def search_locations(size, orientation): #This functionn is used within the func
   else:
     return locations
 
-def random_location(): #This generates a dataset for the size and location of a ship VN
+def random_location(): #VN: This generates a dataset for the size and location of a ship
   size = randint(min_ship_size, max_ship_size)
   orientation = 'horizontal' if randint(0, 1) == 0 else 'vertical'
 
@@ -122,7 +122,7 @@ def random_location(): #This generates a dataset for the size and location of a 
     return {'location': locations[randint(0, len(locations) - 1)], 'size': size,\
      'orientation': orientation}
 
-def get_row(): #This row asks the player for a row number VN
+def get_row(): #VN: This row asks the player for a row number
   while True:
     try:
       guess = int(input("Row Guess: "))
@@ -133,7 +133,7 @@ def get_row(): #This row asks the player for a row number VN
     except ValueError:
       print("\nPlease enter a number")
 
-def get_col(): #This row asks the player for a column number VN
+def get_col(): #VN: This row asks the player for a column number 
   while True:
     try:
       guess = int(input("Column Guess: "))
@@ -145,7 +145,7 @@ def get_col(): #This row asks the player for a column number VN
       print("\nPlease enter a number")
 
 # Create the ships
-#As the above says, this creates the ships, up to the amount that you set with the num_ships variable VN
+#VN: As the above says, this creates the ships, up to the amount that you set with the num_ships variable VN
 temp = 0 
 while temp < num_ships:
   ship_info = random_location()
@@ -158,15 +158,16 @@ del temp
 
 # Play Game
 os.system('clear')
-print_board(board_display) #Prints the board VN
+print_board(board_display) #VN: Prints the board
 
-for turn in range(num_turns):
+for turn in range(num_turns): #VN: This allows the player to keep track of the number of turns and is the loop that contains the main game
+                              #VN: It repeats for the amount of turns specified, or until all the ships have been destroyed
   print("Turn:", turn + 1, "of", num_turns)
   print("Ships left:", len(ship_list))
   print()
   
   guess_coords = {}
-  while True:
+  while True: #VN: This part asks the player where they want to shoot
     guess_coords['row'] = get_row()
     guess_coords['col'] = get_col()
     if board_display[guess_coords['row']][guess_coords['col']] == 'X' or \
@@ -178,8 +179,9 @@ for turn in range(num_turns):
   os.system('clear')
 
   ship_hit = False
-  for ship in ship_list:
-    if ship.contains(guess_coords):
+  for ship in ship_list: 
+    if ship.contains(guess_coords): #VN: This checks the list 'ship', that features the coordinates of the ship's body, for the guessed coordinates
+                                    #VN: If the guessed coordinates are in the list, the ship is hit
       print("Hit!")
       ship_hit = True
       board_display[guess_coords['row']][guess_coords['col']] = 'X'
@@ -193,10 +195,11 @@ for turn in range(num_turns):
 
   print_board(board_display)
   
-  if not ship_list:
+  if not ship_list: #VN: This checks if the list is empty, if it is then the loop breaks and the game ends
     break
 
-# End Game
+# End Game 
+#VN: Ends the game and outputs a line based on if you won or lost
 if ship_list:
   print("You lose!")
 else:
