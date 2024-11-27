@@ -117,7 +117,7 @@ def random_location(): #VN: This generates a dataset for the size and location o
   orientation = 'horizontal' if randint(0, 1) == 0 else 'vertical'
 
   locations = search_locations(size, orientation) #NB: Checks whether there is a valid location for the ship size and orientation>
-                                                       If not, return None, if is, return the dict with randomly selected placement details
+  #NB: If not, return None, if is, return the dict with randomly selected placement details
   if locations == 'None':
     return 'None'
   else:
