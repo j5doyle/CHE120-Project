@@ -172,8 +172,7 @@ for turn in range(num_turns): #VN: This allows the player to keep track of the n
   while True: #NB: Determines if player picked an already guessed position
     guess_coords['row'] = get_row()
     guess_coords['col'] = get_col()
-    if board_display[guess_coords['row']][guess_coords['col']] == 'X' or \ #NB: Determines if guessed by checking X for hit ship and * For missed shot. If either, ask to pick again
-     board_display[guess_coords['row']][guess_coords['col']] == '*':
+    if board_display[guess_coords['row']][guess_coords['col']] == 'X' or board_display[guess_coords['row']][guess_coords['col']] == '*': #NB: Determines if guessed by checking X for hit ship and * For missed shot. If either, ask to pick again
       print("\nYou guessed that one already.")
     else:
       break
