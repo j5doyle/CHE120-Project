@@ -62,7 +62,7 @@ start_button = pygame.Rect((width - 300) // 2, height // 2 + 80, 300, 80)
 quit_button = pygame.Rect((width - 300)// 2, height // 2 + 200, 300, 80)
 home_button = pygame.Rect((width - 150)//2, height // 2 + 300, 150, 60)
 again_button = pygame.Rect((width - 150)//2, height // 2 + 300, 300, 60)
-awesome_cat_click = pygame.Rect(210, 200, 230, 220)
+awesome_cat_click = pygame.Rect(210, 200, 230, 220) #this gives the dimensions of the box containg the cat
 
 # New: Ship class to track individual ship hits
 class Ship:
@@ -133,7 +133,7 @@ def main_menu():
         screen.blit(subtitle_text, (width // 2 - subtitle_text.get_width() // 2, 140))
 
         
-        pygame.draw.rect(screen, black, awesome_cat_click)
+        pygame.draw.rect(screen, black, awesome_cat_click) #This creates a button under the cat
         screen.blit(awesome_cat, (210, 200))
 
         pygame.draw.rect(screen, black, start_button)
