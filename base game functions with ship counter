@@ -87,7 +87,7 @@ def count_remaining_ships(grid):  #counts remaining ships
 def draw_ship_counter():  #displays the number of remaining ships
     remaining = count_remaining_ships(hidden_grid) #effectively remaining = sum of all unique IDs
     remaining_text = subtitle_font.render("Ships Remaining: " + str(remaining), True, black) #display
-    screen.blit(remaining_text, (grid_x_offset, grid_y_offset - 60)) #position
+    screen.blit(remaining_text, (width // 2 - remaining_text.get_width() // 2, 625)) #position
 
 
 def main_menu():
