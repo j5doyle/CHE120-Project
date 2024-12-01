@@ -184,6 +184,18 @@ def draw_game_over():
     screen.blit(again_text, (again_button.x + (again_button.width - again_text.get_width()) // 2,
                              again_button.y + (again_button.height - again_text.get_height()) // 2))
 
+def draw_shots_game_over():
+    game_over_text = "GAME OVER"
+    text = button_font.render(game_over_text, True, white)
+    pygame.draw.rect(screen, black, (width // 2 - 200, height // 2 - 50, 600, 100))
+    screen.blit(text, (width // 2 - text.get_width() // 2, height // 2 - text.get_height() // 2))
+
+    play_again_text = "PLAY AGAIN?"
+    again_text = button_font.render(play_again_text, True, white)
+    pygame.draw.rect(screen, black, again_button)
+    screen.blit(again_text, (again_button.x + (again_button.width - again_text.get_width()) // 2,
+                             again_button.y + (again_button.height - again_text.get_height()) // 2))
+
 def reset_grids():
     for row in range(grid_size):
         for col in range(grid_size):
@@ -195,6 +207,7 @@ def reset_grids():
 def run_game():
     global menu_running
     game_over = False
+    shots_game_over = False
     shots_left = 10
     while not menu_running:  #loop while in the game
         draw_grid_and_labels()
@@ -205,6 +218,9 @@ def run_game():
         
         if game_over:
             draw_game_over()
+            
+        if shots_game_over:
+            draw_shots_game_over()
             
         for event in pygame.event.get():
             if event.type == pygame.QUIT: 
@@ -233,7 +249,7 @@ def run_game():
                         if visible_grid[row][col] == 0:  #if not already clicked (1 would mean already clicked)
                             shots_left -= 1
                             if shots_left <= 0:
-                                game_over = True
+                                shots_game_over = True
                             print(shots_left)
                             if hidden_grid[row][col] == 1:  #indeed a ship on cell hit
                                 visible_grid[row][col] = 1 #show hit
