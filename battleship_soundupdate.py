@@ -300,9 +300,8 @@ def run_game():
         if game_over:
             draw_game_over()
             channel1.stop() #Stops the game background music
-            if not pygame.mixer.get_busy(): #Only plays if the outro isnt already playing
-                outro.set_volume(0.5)
-                outro.play()
+            outro.set_volume(0.5)
+            outro.play(-1)
             
         if shots_game_over:
             draw_shots_game_over()
